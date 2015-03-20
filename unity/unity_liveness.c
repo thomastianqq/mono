@@ -165,7 +165,7 @@ static void mono_traverse_generic_object( MonoObject* object, LivenessState* sta
 
 static void mono_add_process_object (MonoObject* object, LivenessState* state)
 {
-	if (object && !IS_MARKED(object))
+	if ((gunit)object > 0x08040000 && !IS_MARKED(object))
 	{
 		gboolean has_references = GET_VTABLE(object)->klass->has_references;
 		if(has_references || should_process_value(object,state) != LIVENESS_DONT_PROCESS)
