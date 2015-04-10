@@ -3162,7 +3162,8 @@ mono_codegen (MonoCompile *cfg)
 
 		if (bb == cfg->bb_exit) {
 			cfg->epilog_begin = cfg->code_len;
-
+			mono_arch_emit_epilog (cfg);
+			
 			if (cfg->prof_options & MONO_PROFILE_ENTER_LEAVE) {
 				code = cfg->native_code + cfg->code_len;
 				code = mono_arch_instrument_epilog (cfg, mono_profiler_method_leave, code, FALSE);
@@ -3170,7 +3171,7 @@ mono_codegen (MonoCompile *cfg)
 				g_assert (cfg->code_len < cfg->code_size);
 			}
 
-			mono_arch_emit_epilog (cfg);
+
 		}
 	}
 
